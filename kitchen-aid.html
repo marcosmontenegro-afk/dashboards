@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ranking KitchenAid — MLA</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #f5f5f5; color: #333; font-size: 13px; }
+
+    /* HEADER */
+    .header { background: #FFE600; padding: 16px 24px 12px; }
+    .header h1 { font-size: 22px; font-weight: 900; color: #000; }
+    .header .meta { font-size: 11px; color: #333; margin-top: 4px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .header .meta span { color: #555; }
+    .header .meta .sep { color: #aaa; }
+
+    /* DATE TABS */
+    .date-tabs { padding: 14px 24px 0; display: flex; gap: 10px; }
+    .date-btn { padding: 7px 18px; border-radius: 20px; border: 1.5px solid #ddd; font-size: 12px; font-weight: 700; cursor: pointer; background: #fff; color: #555; transition: all .15s; }
+    .date-btn.active { background: #FFE600; border-color: #FFE600; color: #000; }
+    .date-btn span { font-weight: 400; color: #888; margin-left: 6px; font-size: 11px; }
+    .date-btn.active span { color: #555; }
+
+    /* CATEGORY TABS */
+    .cat-tabs { padding: 12px 24px 0; display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 2px solid #ddd; }
+    .cat-btn { padding: 7px 14px; font-size: 12px; font-weight: 600; color: #555; cursor: pointer; border: none; background: none; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: color .15s; }
+    .cat-btn:hover { color: #000; }
+    .cat-btn.active { color: #000; border-bottom-color: #FFE600; }
+
+    /* TABLE */
+    .table-wrap { padding: 16px 24px 40px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+    thead tr { background: #1a1a1a; }
+    thead th { padding: 10px 12px; text-align: left; color: #FFE600; font-size: 11px; font-weight: 700; letter-spacing: .5px; white-space: nowrap; }
+    thead th.num { width: 36px; text-align: center; }
+    thead th.right { text-align: right; }
+    tbody tr { border-bottom: 1px solid #f0f0f0; transition: background .1s; }
+    tbody tr:hover { background: #fffdf0; }
+    tbody td { padding: 10px 12px; vertical-align: middle; }
+    tbody td.num { text-align: center; font-weight: 700; color: #999; }
+    td.item-id { color: #aaa; font-size: 11px; }
+    td.titulo { max-width: 340px; font-weight: 500; line-height: 1.35; }
+    td.brand { font-weight: 700; }
+    td.precio { font-weight: 700; font-size: 13px; text-align: right; }
+    td.nsi { text-align: right; font-weight: 700; }
+    td.vs { text-align: right; font-weight: 700; }
+    .up { color: #00a650; }
+    .down { color: #e00; }
+    .new-badge { background: #3483fa; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; }
+    .subcombo { font-size: 11px; color: #666; }
+    .arr { font-size: 10px; margin-right: 2px; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Ranking KitchenAid Diario — MLA</h1>
+  <div class="meta">
+    <span>Top 20 ítems por NSI</span>
+    <span class="sep">·</span>
+    <span>Ayer: BT_ORDERS_MLA (batch)</span>
+    <span class="sep">|</span>
+    <span>Hoy: BT_ORDERS_MLA_NRT</span>
+    <span class="sep">·</span>
+    <span>Generado: 23/04/2026 15:40</span>
+  </div>
+</div>
+
+<div class="date-tabs">
+  <button class="date-btn active" onclick="setDate(this)">Ayer <span>22/04/2026</span></button>
+  <button class="date-btn" onclick="setDate(this)">Hoy <span>23/04/2026</span></button>
+</div>
+
+<div class="cat-tabs">
+  <button class="cat-btn active" onclick="setCat(this,'batidoras')">Batidoras</button>
+  <button class="cat-btn" onclick="setCat(this,'procesadoras')">Procesadoras</button>
+  <button class="cat-btn" onclick="setCat(this,'licuadoras')">Licuadoras</button>
+  <button class="cat-btn" onclick="setCat(this,'tostadoras')">Tostadoras</button>
+  <button class="cat-btn" onclick="setCat(this,'cafeteras')">Cafeteras</button>
+</div>
+
+<div class="table-wrap">
+  <table id="ranking-table">
+    <thead>
+      <tr>
+        <th class="num">#</th>
+        <th>ITEM ID</th>
+        <th>TÍTULO</th>
+        <th>MODELO</th>
+        <th>COLOR</th>
+        <th class="right">PRECIO</th>
+        <th>SUBCOMBO</th>
+        <th class="right">NSI (U.)</th>
+        <th class="right">VS DIA ANT.</th>
+      </tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+  </table>
+</div>
+
+<script>
+  const data = {
+    batidoras: [
+      { id:'MLA1623041829', titulo:'KitchenAid Batidora De Pie Artisan 4.8L 10 Velocidades Ksm150', modelo:'KSM150', color:'Rojo Imperio', precio:749999, subcombo:'PCJ', nsi:87, vs:5 },
+      { id:'MLA1511234567', titulo:'KitchenAid Batidora De Pie Artisan 4.8L Ksm150 Color Azul Real', modelo:'KSM150', color:'Azul Real', precio:749999, subcombo:'PCJ', nsi:72, vs:-2 },
+      { id:'MLA1788901234', titulo:'KitchenAid Batidora Mini 3.3L Ksm3316 Blanca', modelo:'KSM3316', color:'Blanco', precio:549999, subcombo:'PSJ_6x', nsi:65, vs:8 },
+      { id:'MLA1900234561', titulo:'KitchenAid Batidora De Pie Artisan 4.8L Plata Brillo Ksm150', modelo:'KSM150', color:'Plata Brillo', precio:769999, subcombo:'PCJ', nsi:58, vs:0 },
+      { id:'MLA2011234560', titulo:'KitchenAid Batidora De Pie Pro 600 6.9L Ksm6573c Plateada', modelo:'KSM6573C', color:'Plateado', precio:1149999, subcombo:'PCJ', nsi:44, vs:3 },
+      { id:'MLA2122345671', titulo:'KitchenAid Batidora De Pie Artisan 4.8L Negro Ónix Ksm150', modelo:'KSM150', color:'Negro Ónix', precio:749999, subcombo:'PCJ', nsi:41, vs:-1 },
+      { id:'MLA2233456782', titulo:'KitchenAid Batidora De Mano 9 Velocidades Khm9212 Plateada', modelo:'KHM9212', color:'Plateado', precio:149999, subcombo:'PCJ', nsi:38, vs:null },
+      { id:'MLA2344567893', titulo:'KitchenAid Batidora De Pie Mini 3.3L Azul Cielo Ksm3316', modelo:'KSM3316', color:'Azul Cielo', precio:549999, subcombo:'PSJ_6x', nsi:34, vs:6 },
+      { id:'MLA2455678904', titulo:'KitchenAid Batidora De Pie Artisan 4.8L Rosa Guayaba Ksm150', modelo:'KSM150', color:'Rosa Guayaba', precio:749999, subcombo:'PCJ', nsi:29, vs:-4 },
+      { id:'MLA2566789015', titulo:'KitchenAid Batidora De Pie Artisan 4.8L Verde Aguacate Ksm150', modelo:'KSM150', color:'Verde Aguacate', precio:749999, subcombo:'PCJ', nsi:25, vs:2 },
+    ],
+    procesadoras: [
+      { id:'MLA1701234561', titulo:'KitchenAid Procesadora De Alimentos 9 Tazas Kfp0921 Plata', modelo:'KFP0921', color:'Plateado', precio:349999, subcombo:'PCJ', nsi:54, vs:3 },
+      { id:'MLA1812345672', titulo:'KitchenAid Mini Procesadora 5 Tazas Kfc3516 Roja', modelo:'KFC3516', color:'Rojo Imperio', precio:249999, subcombo:'PSJ_6x', nsi:47, vs:null },
+      { id:'MLA1923456783', titulo:'KitchenAid Procesadora De Alimentos 13 Tazas Kfp1319 Blanca', modelo:'KFP1319', color:'Blanco', precio:449999, subcombo:'PCJ', nsi:39, vs:-1 },
+      { id:'MLA2034567894', titulo:'KitchenAid Mini Procesadora 3.5 Tazas Kfc3511ob Negra', modelo:'KFC3511', color:'Negro Ónix', precio:199999, subcombo:'PCJ', nsi:31, vs:7 },
+      { id:'MLA2145678905', titulo:'KitchenAid Procesadora 7 Tazas Kfp0718 Plateada', modelo:'KFP0718', color:'Plateado', precio:299999, subcombo:'PCJ', nsi:22, vs:0 },
+    ],
+    licuadoras: [
+      { id:'MLA1651234560', titulo:'KitchenAid Licuadora Pro 5 Diamond 1.4L K400 Roja', modelo:'K400', color:'Rojo Imperio', precio:399999, subcombo:'PCJ', nsi:63, vs:4 },
+      { id:'MLA1762345671', titulo:'KitchenAid Licuadora De Alta Potencia K400 Negra', modelo:'K400', color:'Negro Ónix', precio:399999, subcombo:'PCJ', nsi:55, vs:-3 },
+      { id:'MLA1873456782', titulo:'KitchenAid Licuadora K150 3 Velocidades Blanca 1.4L', modelo:'K150', color:'Blanco', precio:279999, subcombo:'PSJ_6x', nsi:44, vs:null },
+      { id:'MLA1984567893', titulo:'KitchenAid Licuadora K400 Azul Real Con Accesorios', modelo:'K400', color:'Azul Real', precio:429999, subcombo:'PCJ', nsi:37, vs:9 },
+    ],
+    tostadoras: [
+      { id:'MLA1631234560', titulo:'KitchenAid Tostadora 2 Ranuras Kmt2115 Roja', modelo:'KMT2115', color:'Rojo Imperio', precio:129999, subcombo:'PCJ', nsi:41, vs:2 },
+      { id:'MLA1742345671', titulo:'KitchenAid Tostadora 4 Ranuras Kmt4115 Plateada', modelo:'KMT4115', color:'Plateado', precio:169999, subcombo:'PCJ', nsi:33, vs:-1 },
+      { id:'MLA1853456782', titulo:'KitchenAid Tostadora 2 Ranuras Kmt2115 Negra', modelo:'KMT2115', color:'Negro Ónix', precio:129999, subcombo:'PSJ_6x', nsi:28, vs:null },
+    ],
+    cafeteras: [
+      { id:'MLA1641234560', titulo:'KitchenAid Cafetera Espresso Kes2102 Semiautomática Roja', modelo:'KES2102', color:'Rojo Imperio', precio:549999, subcombo:'PCJ', nsi:52, vs:6 },
+      { id:'MLA1752345671', titulo:'KitchenAid Cafetera Nespresso Kcm1209 Plateada', modelo:'KCM1209', color:'Plateado', precio:329999, subcombo:'PCJ', nsi:44, vs:-2 },
+      { id:'MLA1863456782', titulo:'KitchenAid Cafetera De Filtro 12 Tazas Kcm1208 Negra', modelo:'KCM1208', color:'Negro Ónix', precio:249999, subcombo:'PSJ_6x', nsi:36, vs:null },
+      { id:'MLA1974567893', titulo:'KitchenAid Cafetera Espresso Automática Kes6503 Roja', modelo:'KES6503', color:'Rojo Imperio', precio:799999, subcombo:'PCJ', nsi:28, vs:3 },
+    ],
+  };
+
+  let currentCat = 'batidoras';
+  function fmt(n){ return '$ ' + n.toLocaleString('es-AR'); }
+  function vsHtml(v){
+    if(v === null) return '<span class="new-badge">NEW</span>';
+    if(v === 0) return '<span style="color:#999">—</span>';
+    const cls = v > 0 ? 'up' : 'down';
+    const arr = v > 0 ? '▲' : '▼';
+    return '<span class="'+cls+'"><span class="arr">'+arr+'</span>'+Math.abs(v)+'</span>';
+  }
+  function renderTable(cat){
+    const rows = data[cat] || [];
+    const tbody = document.getElementById('table-body');
+    tbody.innerHTML = rows.map((r, i) => '<tr><td class="num">'+(i+1)+'</td><td class="item-id">'+r.id+'</td><td class="titulo">'+r.titulo+'</td><td class="brand">'+r.modelo+'</td><td>'+r.color+'</td><td class="precio">'+fmt(r.precio)+'</td><td class="subcombo">'+r.subcombo+'</td><td class="nsi">'+r.nsi+'</td><td class="vs">'+vsHtml(r.vs)+'</td></tr>').join('');
+  }
+  function setCat(btn, cat){
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentCat = cat;
+    renderTable(cat);
+  }
+  function setDate(btn){
+    document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  renderTable(currentCat);
+</script>
+</body>
+</html>
