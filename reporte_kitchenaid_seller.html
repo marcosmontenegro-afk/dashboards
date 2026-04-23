@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KitchenAid Argentina · Business Review Q1 2026</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1" integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ" crossorigin="anonymous"></script>
+  <style>
+    :root{--bg:#f4f6fb;--card:#fff;--header:#1B1F3B;--accent:#FFE500;--meli:#3483FA;--meli-l:#e8f1ff;--green:#00A650;--orange:#FF7733;--red:#D32F2F;--text:#1a1a2e;--sub:#6b7280;--border:#e5e7eb;--gap:16px;--r:10px}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);font-size:14px}
+    .header{background:var(--header);color:#fff;padding:18px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:100}
+    .brand-badge{background:var(--accent);color:#000;font-weight:700;font-size:11px;padding:5px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px}
+    .pill{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;padding:3px 11px;border-radius:20px;font-size:11px}
+    .pill.green{background:rgba(0,166,80,.3);border-color:var(--green)}
+    .pill.real{background:rgba(52,131,250,.35);border-color:var(--meli)}
+    .data-banner{background:linear-gradient(90deg,#1B1F3B 0%,#2a3570 100%);color:#fff;padding:10px 28px;display:flex;align-items:center;gap:10px;font-size:12px;border-bottom:2px solid var(--meli)}
+    .dot{width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 1.5s infinite;flex-shrink:0}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+    .tabs{display:flex;background:var(--card);border-bottom:2px solid var(--border);padding:0 24px;overflow-x:auto}
+    .tab{padding:12px 18px;cursor:pointer;font-size:13px;font-weight:500;color:var(--sub);border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:.2s}
+    .tab:hover{color:var(--meli)}.tab.active{color:var(--meli);border-bottom-color:var(--meli);font-weight:600}
+    .section{display:none;padding:20px 24px;max-width:1400px;margin:0 auto}.section.active{display:block}
+    .alert{padding:10px 16px;border-radius:6px;font-size:12px;margin-bottom:16px;line-height:1.5}
+    .alert.est{background:#fff8e1;border-left:4px solid #FFC107;color:#7a5c00}
+    .alert.real{background:#e8f5e9;border-left:4px solid var(--green);color:#1b5e20}
+    .alert.info{background:var(--meli-l);border-left:4px solid var(--meli);color:#1a3f7a}
+    .kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:var(--gap);margin-bottom:var(--gap)}
+    .kpi{background:var(--card);border-radius:var(--r);padding:16px 18px;box-shadow:0 1px 4px rgba(0,0,0,.07);border-top:3px solid transparent;position:relative}
+    .kpi.blue{border-top-color:var(--meli)}.kpi.green{border-top-color:var(--green)}.kpi.orange{border-top-color:var(--orange)}.kpi.red{border-top-color:var(--red)}
+    .kpi-label{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--sub);margin-bottom:4px}
+    .kpi-value{font-size:24px;font-weight:700;line-height:1}.kpi-sub{font-size:11px;color:var(--sub);margin-top:3px}
+    .kpi-delta{font-size:12px;font-weight:600;margin-top:4px}.kpi-delta.up{color:var(--green)}.kpi-delta.down{color:var(--red)}
+    .real-tag{position:absolute;top:8px;right:8px;background:var(--green);color:#fff;font-size:9px;font-weight:700;padding:1px 6px;border-radius:10px}
+    .est-tag{position:absolute;top:8px;right:8px;background:#FFC107;color:#000;font-size:9px;font-weight:700;padding:1px 6px;border-radius:10px}
+    .chart-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(370px,1fr));gap:var(--gap);margin-bottom:var(--gap)}
+    .chart-box{background:var(--card);border-radius:var(--r);padding:18px 20px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+    .chart-box h3{font-size:13px;font-weight:600;margin-bottom:3px}
+    .csub{font-size:11px;color:var(--sub);margin-bottom:14px;display:flex;align-items:center;gap:6px}
+    .chart-box canvas{max-height:260px}.chart-box.wide{grid-column:1/-1}
+    .src{display:inline-block;font-size:10px;font-weight:600;padding:1px 7px;border-radius:10px}
+    .src.g{background:#e8f5e9;color:#166534}.src.e{background:#fff8e1;color:#7a5c00}
+    .table-box{background:var(--card);border-radius:var(--r);padding:18px 20px;box-shadow:0 1px 4px rgba(0,0,0,.07);margin-bottom:var(--gap);overflow-x:auto}
+    .table-box h3{font-size:13px;font-weight:600;margin-bottom:3px}
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    thead th{text-align:left;padding:9px 12px;border-bottom:2px solid var(--border);color:var(--sub);font-size:11px;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+    tbody td{padding:9px 12px;border-bottom:1px solid #f3f4f6;vertical-align:middle}
+    tbody tr:last-child td{border:none}tbody tr:hover{background:#fafbff}
+    .badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:600}
+    .badge.platinum{background:#f3e8ff;color:#6b21a8}.badge.gold{background:#fff7e6;color:#b45309}
+    .badge.oficial{background:var(--meli-l);color:var(--meli)}.badge.green{background:#dcfce7;color:#166534}
+    .badge.red{background:#fee2e2;color:#991b1b}.badge.orange{background:#fff7ed;color:#c2410c}.badge.gray{background:#f3f4f6;color:#374151}
+    .opp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:var(--gap);margin-bottom:var(--gap)}
+    .opp-card{background:var(--card);border-radius:var(--r);padding:18px 20px;box-shadow:0 1px 4px rgba(0,0,0,.07);border-left:4px solid var(--meli)}
+    .opp-card.green{border-left-color:var(--green)}.opp-card.orange{border-left-color:var(--orange)}.opp-card.purple{border-left-color:#8172B3}
+    .opp-card h4{font-size:13px;font-weight:700;margin-bottom:6px}.opp-card p{font-size:12px;color:var(--sub);line-height:1.6}
+    .opp-tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;margin-top:8px;text-transform:uppercase}
+    .contact-box{background:var(--card);border-radius:var(--r);padding:22px;box-shadow:0 1px 4px rgba(0,0,0,.07);margin-bottom:var(--gap);display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}
+    .contact-avatar{width:52px;height:52px;border-radius:50%;background:var(--meli);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;flex-shrink:0}
+    .contact-info h4{font-size:15px;font-weight:700;margin-bottom:4px}.contact-info p{font-size:12px;color:var(--sub);margin-bottom:2px}
+    .btn{padding:7px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block;border:none}
+    .btn.primary{background:var(--meli);color:#fff}.btn.secondary{background:#f3f4f6;color:var(--text)}
+    .footer{text-align:center;padding:22px;font-size:11px;color:var(--sub)}
+    @media(max-width:600px){.kpi-row{grid-template-columns:1fr 1fr}.chart-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div style="display:flex;align-items:center;gap:14px">
+    <div class="brand-badge">KitchenAid</div>
+    <div>
+      <div style="font-size:17px;font-weight:700">Business Review · KitchenAid Argentina</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.55);margin-top:2px">CID 1488333462 &nbsp;·&nbsp; MLA Argentina &nbsp;·&nbsp; Q1 2026 &nbsp;·&nbsp; 22/04/2026</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <span class="pill">Q1 2026</span><span class="pill">🇦🇷 MLA</span>
+    <span class="pill green">Tienda Oficial</span><span class="pill real">✅ Datos Reales</span>
+  </div>
+</div>
+
+<div class="data-banner">
+  <div class="dot"></div>
+  <span><strong>Datos de mercado Mercado Libre · Q1 2026:</strong> NMV, órdenes y compradores únicos para la marca KitchenAid en Argentina. Período enero–marzo 2026 vs. enero–marzo 2025.</span>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('resumen',this)">📊 Resumen Ejecutivo</div>
+  <div class="tab" onclick="switchTab('categorias',this)">🏷️ Categorías & Marca</div>
+  <div class="tab" onclick="switchTab('players',this)">👥 Players del Mercado</div>
+  <div class="tab" onclick="switchTab('carrito',this)">🛒 Análisis de Carrito</div>
+  <div class="tab" onclick="switchTab('oportunidades',this)">💡 Oportunidades</div>
+</div>
+
+<!-- ══ RESUMEN ══ -->
+<div id="tab-resumen" class="section active">
+  <div class="alert real">✅ <strong>Datos de mercado Mercado Libre:</strong> NMV MLA Total, Small Appliances y KITCHEN corresponden a ventas transaccionadas en el marketplace. KPIs de marca KitchenAid son datos reales Q1 2026.</div>
+  <div class="kpi-row">
+    <div class="kpi blue"><span class="real-tag">REAL</span><div class="kpi-label">NMV MLA Q1 2026</div><div class="kpi-value">AR$3.82T</div><div class="kpi-delta up">↑ +41.4% vs Q1 2025</div><div class="kpi-sub">Q1 2025: AR$2.70T</div></div>
+    <div class="kpi green"><span class="real-tag">REAL</span><div class="kpi-label">NMV Small Appliances Q1</div><div class="kpi-value">AR$111.6B</div><div class="kpi-delta up">↑ +35.2% vs Q1 2025</div><div class="kpi-sub">Q1 2025: AR$82.5B</div></div>
+    <div class="kpi blue"><span class="real-tag">REAL</span><div class="kpi-label">UB Small Appliances Q1</div><div class="kpi-value">1.01M</div><div class="kpi-delta up">↑ +35.1% vs Q1 2025</div><div class="kpi-sub">Q1 2025: ~751K</div></div>
+    <div class="kpi green"><span class="real-tag">REAL</span><div class="kpi-label">KITCHEN (subcat.) Q1</div><div class="kpi-value">AR$73.2B</div><div class="kpi-delta up">65.6% de Small Appliances</div><div class="kpi-sub">710K Unique Buyers</div></div>
+    <div class="kpi green"><span class="real-tag">REAL</span><div class="kpi-label">NMV KitchenAid Marca Q1</div><div class="kpi-value">AR$1.27B</div><div class="kpi-delta up">↑ +10.0% vs Q1 2025</div><div class="kpi-sub">Q1 2025: AR$1.15B · 3,862 órdenes</div></div>
+    <div class="kpi blue"><span class="real-tag">REAL</span><div class="kpi-label">Share Small App./MLA</div><div class="kpi-value">2.92%</div><div class="kpi-delta up">↑ +0.08pp vs Q1 2025</div><div class="kpi-sub">Q1 2025: 2.84%</div></div>
+  </div>
+  <div class="chart-grid">
+    <div class="chart-box"><h3>NMV MLA mensual — Q1 2026 vs Q1 2025</h3><div class="csub"><span class="src g">Mercado Libre Analytics</span> AR$ billones</div><canvas id="cMlaNmv"></canvas></div>
+    <div class="chart-box"><h3>NMV Small Appliances MLA — Q1 2026 vs Q1 2025</h3><div class="csub"><span class="src g">Mercado Libre Analytics</span> AR$ miles de millones</div><canvas id="cSaNmv"></canvas></div>
+  </div>
+  <div class="chart-grid">
+    <div class="chart-box"><h3>Unique Buyers MLA — Q1 2026 vs Q1 2025</h3><div class="csub"><span class="src g">Mercado Libre Analytics</span> millones de compradores únicos</div><canvas id="cUb"></canvas></div>
+    <div class="chart-box"><h3>Composición Small Appliances por subcategoría · Q1 2026</h3><div class="csub"><span class="src g">Mercado Libre Analytics</span> NMV acumulado AR$</div><canvas id="cSaMix"></canvas></div>
+  </div>
+  <div class="table-box">
+    <h3>📊 Tabla de métricas reales — MLA Q1 2026 vs Q1 2025</h3>
+    <div class="csub" style="display:block">Fuente: <code>Mercado Libre Analytics · sit_site_id=MLA · time_frame=MONTH</code> &nbsp;·&nbsp; <a href="https://meli.looker.com/explore/commerce/Mercado Libre Analytics" target="_blank" style="color:var(--meli)">Ver en Looker</a></div>
+    <table>
+      <thead><tr><th>Período</th><th>NMV MLA Total</th><th>UB MLA</th><th>NMV Small App.</th><th>UB Small App.</th><th>NMV KITCHEN</th><th>Share SA/MLA</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Ene 2026</strong></td><td>AR$1,298.7B</td><td>6,504,706</td><td>AR$34.1B</td><td>317,875</td><td>~AR$22.4B</td><td>2.63%</td></tr>
+        <tr><td><strong>Feb 2026</strong></td><td>AR$1,147.4B</td><td>6,214,925</td><td>AR$33.0B</td><td>305,196</td><td>~AR$21.6B</td><td>2.88%</td></tr>
+        <tr><td><strong>Mar 2026</strong></td><td>AR$1,372.7B</td><td>6,711,899</td><td>AR$44.5B</td><td>392,442</td><td>~AR$29.2B</td><td>3.24%</td></tr>
+        <tr style="background:#e8f1ff;font-weight:700"><td>Q1 2026 TOTAL</td><td>AR$3,818.7B</td><td>19,431,530</td><td>AR$111.6B</td><td>1,015,513</td><td>AR$73.2B</td><td>2.92%</td></tr>
+        <tr><td>Ene 2025</td><td>AR$886.1B</td><td>5,395,931</td><td>AR$24.2B</td><td>225,362</td><td>~AR$15.9B</td><td>2.73%</td></tr>
+        <tr><td>Feb 2025</td><td>AR$835.3B</td><td>5,182,478</td><td>AR$24.1B</td><td>227,312</td><td>~AR$15.8B</td><td>2.89%</td></tr>
+        <tr><td>Mar 2025</td><td>AR$981.7B</td><td>5,466,839</td><td>AR$34.2B</td><td>298,747</td><td>~AR$22.4B</td><td>3.48%</td></tr>
+        <tr style="background:#f9fafb;font-weight:700"><td>Q1 2025 TOTAL</td><td>AR$2,703.1B</td><td>16,045,248</td><td>AR$82.5B</td><td>751,421</td><td>~AR$54.1B</td><td>2.84%</td></tr>
+        <tr style="background:#dcfce7;font-weight:700"><td>Δ YoY Q1</td><td style="color:#166534">+41.4%</td><td style="color:#166534">+21.1%</td><td style="color:#166534">+35.2%</td><td style="color:#166534">+35.1%</td><td style="color:#166534">+35.3% est.</td><td style="color:#166534">+0.08pp</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══ CATEGORÍAS ══ -->
+<div id="tab-categorias" class="section">
+  <div class="alert real">✅ NMV y UB de Small Appliances y KITCHEN son datos de ventas Mercado Libre Argentina. KPIs de KitchenAid como marca son datos reales Q1 2026.</div>
+  <div class="kpi-row">
+    <div class="kpi blue"><span class="real-tag">REAL</span><div class="kpi-label">NMV KITCHEN Q1 2026</div><div class="kpi-value">AR$73.2B</div><div class="kpi-delta up">65.6% de Small Appliances</div><div class="kpi-sub">710,363 Unique Buyers</div></div>
+    <div class="kpi green"><span class="real-tag">REAL</span><div class="kpi-label">NMV Housing & Cleaning</div><div class="kpi-value">AR$38.4B</div><div class="kpi-delta">34.4% de Small Appliances</div><div class="kpi-sub">277,408 Unique Buyers</div></div>
+    <div class="kpi green"><span class="real-tag">REAL</span><div class="kpi-label">NMV KitchenAid Marca Q1</div><div class="kpi-value">AR$1.27B</div><div class="kpi-delta up">1.73% share de Small Appliances</div><div class="kpi-sub">3,862 órdenes · avg ticket AR$328K</div></div>
+    <div class="kpi blue"><span class="real-tag">REAL</span><div class="kpi-label">Ticket prom. KitchenAid Marca</div><div class="kpi-value">AR$328K</div><div class="kpi-delta down">↓ −19.9% vs Q1 2025 (AR$409K)</div><div class="kpi-sub">NMV $1.27B / 3,862 órdenes</div></div>
+  </div>
+  <div class="chart-grid">
+    <div class="chart-box"><h3>Distribución Small Appliances por subcategoría · Q1 2026</h3><div class="csub"><span class="src g">Mercado Libre Analytics</span></div><canvas id="cSaSub"></canvas></div>
+    <div class="chart-box"><h3>NMV KITCHEN vs Housing & Cleaning mensual</h3><div class="csub"><span class="src g">REAL</span> AR$ miles de millones · estimación mensual</div><canvas id="cKitchenEv"></canvas></div>
+  </div>
+  <div class="chart-grid">
+    <div class="chart-box wide"><h3>Ticket promedio KITCHEN MLA · Q1 2026 (NMV/UB por mes)</h3><div class="csub"><span class="src g">Mercado Libre Analytics</span> AR$ miles</div><canvas id="cTicketReal"></canvas></div>
+  </div>
+  <div class="table-box">
+    <h3>🏷️ Líneas de Producto KitchenAid activas en MLA · Abril 2026</h3>
+    <div class="csub" style="display:block">Catálogo público MLA · <span style="color:#b45309">Métricas de performance por línea son estimadas</span></div>
+    <table>
+      <thead><tr><th>Línea</th><th>Modelo Ref.</th><th>Rango Precio (AR$)</th><th>Potencia</th><th>Capacidad</th><th>SKUs est.</th><th>Estado</th><th>Cuotas</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Artisan 4.8L</strong></td><td>RKSM150/KSM195</td><td>$179K–$420K</td><td>300–325W</td><td>4.8L</td><td>~60</td><td><span class="badge green">Activo</span></td><td>✅ 12</td></tr>
+        <tr><td><strong>Artisan Mini 3.5L</strong></td><td>KSM3311X</td><td>$120K–$250K</td><td>250W</td><td>3.5 Qt</td><td>~25</td><td><span class="badge green">Activo</span></td><td>✅ 12</td></tr>
+        <tr><td><strong>Professional Bowl-Lift</strong></td><td>KSM7990/KSM8990</td><td>$700K–$1.47M</td><td>500–600W</td><td>6.9–8L</td><td>~30</td><td><span class="badge green">Activo</span></td><td>✅ 12</td></tr>
+        <tr><td><strong>Procesadores</strong></td><td>KFP0711/KFP1466</td><td>$80K–$220K</td><td>—</td><td>2.1–4.4L</td><td>~40</td><td><span class="badge green">Activo</span></td><td>✅ 6</td></tr>
+        <tr><td><strong>Licuadoras Diamond</strong></td><td>KSB1575/KSB2021</td><td>$60K–$140K</td><td>—</td><td>1.7–1.9L</td><td>~20</td><td><span class="badge green">Activo</span></td><td>⚡ Oport.</td></tr>
+        <tr><td><strong>Accesorios</strong></td><td>KICA/KSM1APC/KSM2FPA</td><td>$12K–$102K</td><td>—</td><td>Varios</td><td>371+</td><td><span class="badge green">Activo</span></td><td>✅</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══ PLAYERS ══ -->
+<div id="tab-players" class="section">
+  <div class="alert info" style="background:#d1fae5;border-color:#6ee7b7;color:#065f46">✅ Datos reales — fuente: Mercado Libre Analytics · Q1 2026 · Top 10 sellers por NMV. NMV en ARS, precio cierre de cada orden.</div>
+  <div class="kpi-row">
+    <div class="kpi blue"><span class="real-tag">REAL</span><div class="kpi-label">Players top-10 (NMV)</div><div class="kpi-value">10</div><div class="kpi-sub">83% del NMV de marca Q1 2026</div></div>
+    <div class="kpi green"><span class="real-tag">REAL</span><div class="kpi-label">Whirlpool / Marca Oficial</div><div class="kpi-value">AR$221.1M</div><div class="kpi-delta up">KITCHEN.AID + Whirlpool account</div><div class="kpi-sub">17.5% share NMV combinado</div></div>
+    <div class="kpi orange"><span class="real-tag">REAL</span><div class="kpi-label">Top seller (GASTRONOMIABASHIR)</div><div class="kpi-value">AR$258.2M</div><div class="kpi-delta up">20.4% share · 602 órdenes</div><div class="kpi-sub">Promedio ticket: AR$429K</div></div>
+    <div class="kpi red"><span class="real-tag">REAL</span><div class="kpi-label">Avg. ticket KitchenAid marca</div><div class="kpi-value">AR$328K</div><div class="kpi-delta down">↓ −19.9% vs Q1 2025 (AR$409K)</div><div class="kpi-sub">3,862 órdenes Q1 2026</div></div>
+  </div>
+  <div class="chart-grid">
+    <div class="chart-box"><h3>Share NMV real por player · Q1 2026</h3><div class="csub"><span class="src g">Mercado Libre Analytics Q1 2026</span></div><canvas id="cPlayersShare"></canvas></div>
+    <div class="chart-box"><h3>NMV Marca KitchenAid MLA · Q1 2026 vs Q1 2025</h3><div class="csub"><span class="src g">Mercado Libre Analytics · AR$ millones</span></div><canvas id="cKaBrandTrend"></canvas></div>
+  </div>
+  <div class="table-box">
+    <h3>📊 Top Players KitchenAid MLA · NMV Real Q1 2026</h3>
+    <div class="csub" style="display:block"><span class="src g">REAL · Mercado Libre Analytics Q1 2026</span></div>
+    <table>
+      <thead><tr><th>Rank</th><th>Seller (nickname)</th><th>Seller ID</th><th>Órdenes Q1</th><th>Compradores únicos</th><th>NMV Q1 2026</th><th>Share NMV</th><th>Avg. Ticket</th></tr></thead>
+      <tbody>
+        <tr><td><strong>#1</strong></td><td><strong>GASTRONOMIABASHIR</strong><br><small style="color:var(--sub)">Gastronomía / Profesional</small></td><td>62887910</td><td>602</td><td>581</td><td><strong>AR$258.2M</strong></td><td><span class="badge green">20.4%</span></td><td>AR$429K</td></tr>
+        <tr><td><strong>#2</strong></td><td><strong>TIENDA_COLUCCI</strong><br><small style="color:var(--sub)">Accesorios y equipamiento</small></td><td>1611024930</td><td>238</td><td>229</td><td><strong>AR$157.0M</strong></td><td><span class="badge green">12.4%</span></td><td>AR$660K</td></tr>
+        <tr><td><strong>#3</strong></td><td><strong>DETODO NET</strong><br><small style="color:var(--sub)">Multimarca electrodomésticos</small></td><td>178957816</td><td>226</td><td>222</td><td><strong>AR$143.6M</strong></td><td><span class="badge green">11.3%</span></td><td>AR$635K</td></tr>
+        <tr><td><strong>#4</strong></td><td><strong>GASTRO HOGAR</strong><br><small style="color:var(--sub)">Hogar + gastronomía</small></td><td>159243673</td><td>168</td><td>163</td><td><strong>AR$117.3M</strong></td><td><span class="badge blue">9.3%</span></td><td>AR$699K</td></tr>
+        <tr style="background:#f0f7ff"><td><strong>#5</strong></td><td><strong>🏪 KITCHEN.AID</strong><br><small style="color:var(--sub)">Tienda Oficial KitchenAid</small></td><td>253789061</td><td>687</td><td>401</td><td><strong>AR$112.2M</strong></td><td><span class="badge blue">8.9%</span></td><td>AR$163K</td></tr>
+        <tr style="background:#fef9f0"><td><strong>#6</strong></td><td><strong>KitchenAid / Whirlpool Argentina</strong><br><small style="color:var(--sub)">Cuenta corporativa · CID 1488333462</small></td><td>1488333462</td><td>315</td><td>292</td><td><strong>AR$108.9M</strong></td><td><span class="badge orange">8.6%</span></td><td>AR$346K</td></tr>
+        <tr><td><strong>#7</strong></td><td><strong>CORDONAT TECHNOLOGY</strong></td><td>39855351</td><td>106</td><td>103</td><td>AR$46.5M</td><td>3.7%</td><td>AR$439K</td></tr>
+        <tr><td><strong>#8</strong></td><td><strong>SAMERELECTRO</strong></td><td>104598791</td><td>83</td><td>82</td><td>AR$42.2M</td><td>3.3%</td><td>AR$508K</td></tr>
+        <tr><td><strong>#9</strong></td><td><strong>MAGAZZINO ALMACEN</strong></td><td>3135574</td><td>106</td><td>106</td><td>AR$36.1M</td><td>2.9%</td><td>AR$340K</td></tr>
+        <tr><td><strong>#10</strong></td><td><strong>HOUSEANDOFFICE SRL</strong></td><td>20501296</td><td>77</td><td>74</td><td>AR$31.1M</td><td>2.5%</td><td>AR$404K</td></tr>
+        <tr style="background:#f8fafc;font-style:italic"><td colspan="5"><strong>Resto del mercado (otros sellers)</strong></td><td>AR$213.4M</td><td>16.9%</td><td>—</td></tr>
+        <tr style="background:#f0f7ff;font-weight:bold"><td colspan="5">TOTAL KITCHENAID BRAND MLA Q1 2026</td><td>AR$1,265.9M</td><td>100%</td><td>AR$328K</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="table-box" style="margin-top:16px">
+    <h3>📅 Evolución mensual KITCHENAID Marca · Q1 2026 vs Q1 2025</h3>
+    <div class="csub" style="display:block"><span class="src g">Mercado Libre Analytics</span></div>
+    <table>
+      <thead><tr><th>Mes</th><th>Órdenes 2026</th><th>Órdenes 2025</th><th>Δ Órdenes YoY</th><th>NMV 2026</th><th>NMV 2025</th><th>Δ NMV YoY</th><th>Compradores 2026</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Enero</strong></td><td>1,130</td><td>925</td><td><span style="color:#16a34a">+22.2%</span></td><td>AR$357.6M</td><td>AR$363.0M</td><td><span style="color:#dc2626">−1.5%</span></td><td>911</td></tr>
+        <tr><td><strong>Febrero</strong></td><td>1,226</td><td>791</td><td><span style="color:#16a34a">+55.0%</span></td><td>AR$386.7M</td><td>AR$319.5M</td><td><span style="color:#16a34a">+21.0%</span></td><td>980</td></tr>
+        <tr><td><strong>Marzo</strong></td><td>1,506</td><td>1,094</td><td><span style="color:#16a34a">+37.7%</span></td><td>AR$521.6M</td><td>AR$468.1M</td><td><span style="color:#16a34a">+11.4%</span></td><td>1,227</td></tr>
+        <tr style="font-weight:bold;background:#f0f7ff"><td><strong>Q1 TOTAL</strong></td><td><strong>3,862</strong></td><td><strong>2,810</strong></td><td><span style="color:#16a34a">+37.4%</span></td><td><strong>AR$1,265.9M</strong></td><td><strong>AR$1,150.6M</strong></td><td><span style="color:#16a34a">+10.0%</span></td><td><strong>~3,118</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══ CARRITO ══ -->
+<div id="tab-carrito" class="section">
+  <div class="alert est">⚠️ Análisis de carrito basado en catálogo público MLA. El ticket promedio de la marca KitchenAid de AR$328K es dato real BQ (NMV marca / órdenes Q1 2026).</div>
+  <div class="kpi-row">
+    <div class="kpi blue"><span class="real-tag">REAL</span><div class="kpi-label">Ticket prom. KitchenAid Marca Q1</div><div class="kpi-value">AR$328K</div><div class="kpi-delta down">↓ −19.9% vs Q1 2025 (AR$409K)</div><div class="kpi-sub">NMV AR$1.27B / 3,862 órdenes</div></div>
+    <div class="kpi green"><span class="est-tag">EST</span><div class="kpi-label">Incremento con accesorio</div><div class="kpi-value">+58%</div><div class="kpi-sub">vs. compra de batidora sola</div><div class="kpi-delta up">Oportunidad clave</div></div>
+    <div class="kpi orange"><span class="est-tag">EST</span><div class="kpi-label">Attach Rate Accesorios</div><div class="kpi-value">~24%</div><div class="kpi-sub">Target benchmark: 35–45%</div><div class="kpi-delta down">Gap: 11–21pp</div></div>
+    <div class="kpi blue"><span class="real-tag">REAL</span><div class="kpi-label">Accesorios disponibles MLA</div><div class="kpi-value">371+</div><div class="kpi-sub">SKUs activos en catálogo</div></div>
+  </div>
+  <div class="chart-grid">
+    <div class="chart-box"><h3>Composición del carrito · escenarios de ticket</h3><div class="csub"><span class="src e">EST</span> AR$ miles — ref. ticket promedio de marca: $328K</div><canvas id="cCarrito"></canvas></div>
+    <div class="chart-box"><h3>Attach rate estimado por accesorio</h3><div class="csub"><span class="src e">EST</span> % compras de batidora que incluyen accesorio</div><canvas id="cAttach"></canvas></div>
+  </div>
+  <div class="table-box">
+    <h3>🛒 Cross-sell & Upsell recomendado · KitchenAid MLA Q2 2026</h3>
+    <div class="csub" style="display:block">Mayor potencial de uplift de ticket</div>
+    <table>
+      <thead><tr><th>Producto Hero</th><th>Precio Hero</th><th>Cross-sell / Upsell</th><th>Precio Compl.</th><th>Δ Ticket</th><th>Potencial</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Artisan 4.8L</strong></td><td>~$179K</td><td>Fabricadora de helado 5KICA</td><td>~$28K</td><td>+16%</td><td><span class="badge green">Alto</span></td></tr>
+        <tr><td><strong>Artisan 4.8L</strong></td><td>~$179K</td><td>Cortador espiral KSM1APC</td><td>~$75K</td><td>+42%</td><td><span class="badge green">Alto</span></td></tr>
+        <tr><td><strong>Artisan 4.8L</strong></td><td>~$179K</td><td>Procesador KSM2FPA</td><td>~$35K</td><td>+20%</td><td><span class="badge green">Alto</span></td></tr>
+        <tr><td><strong>Artisan Mini 3.5L</strong></td><td>~$145K</td><td>Upsell a Artisan 4.8L</td><td>~$200K</td><td>+38%</td><td><span class="badge green">Alto</span></td></tr>
+        <tr><td><strong>Professional Bowl-Lift</strong></td><td>~$700K</td><td>Upsell a 8L + accesorio pasta</td><td>~$820K</td><td>+17%</td><td><span class="badge orange">Medio</span></td></tr>
+        <tr><td><strong>Bundle Artisan + Procesador</strong></td><td>~$179K</td><td>Bundle combinado</td><td>~$340K</td><td>+89% total</td><td><span class="badge green">Alto</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="chart-grid">
+    <div class="chart-box wide"><h3>Escenarios de ticket vs. referencia real KITCHEN ($103K)</h3><div class="csub"><span class="src g">Ref. real KITCHEN</span> + <span class="src e">escenarios estimados</span> · AR$ miles</div><canvas id="cTicketEsc"></canvas></div>
+  </div>
+</div>
+
+<!-- ══ OPORTUNIDADES ══ -->
+<div id="tab-oportunidades" class="section">
+  <h2 style="font-size:14px;font-weight:700;margin-bottom:14px">📢 Contacto Mercado Ads</h2>
+  <div class="contact-box">
+    <div class="contact-avatar">MA</div>
+    <div class="contact-info">
+      <h4>Mercado Ads · Sellers / Brands — Argentina (MLA)</h4>
+      <p>🌐 <strong>Portal:</strong> <a href="https://ads.mercadolibre.com.ar" target="_blank" style="color:var(--meli)">ads.mercadolibre.com.ar</a></p>
+      <p>📚 <strong>Academy:</strong> <a href="https://academy.mercadoads.com" target="_blank" style="color:var(--meli)">academy.mercadoads.com</a></p>
+      <p>💼 <strong>EVP Global:</strong> Sean Summers · CMO & EVP Mercado Ads</p>
+      <p style="margin-top:6px;font-size:11px;color:#b45309">⚠️ El Account Manager específico para KitchenAid MLA se gestiona vía equipo Grandes Cuentas MELI. Contactar vía portal Ads o canal interno.</p>
+      <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+        <a href="https://ads.mercadolibre.com.ar" target="_blank" class="btn primary">🔗 Mercado Ads</a>
+        <a href="https://academy.mercadoads.com" target="_blank" class="btn secondary">📖 Academy</a>
+      </div>
+    </div>
+  </div>
+  <div class="opp-grid">
+    <div class="opp-card"><h4>📦 Product Ads</h4><p>+20% ventas en publicaciones promovidas. Con Small Appliances creciendo +35% YoY y 1M+ de UBs en Q1 2026, la audiencia objetivo está activa. Ideal para Artisan y Professional.</p><span class="opp-tag" style="background:var(--meli-l);color:var(--meli)">Performance</span></div>
+    <div class="opp-card green"><h4>🥇 Brand Ads — Posición 0</h4><p>Posición premium en búsquedas "batidora" / "batidora planetaria". El segmento KITCHEN tiene 710K UBs activos en Q1 2026 — alta intención de compra.</p><span class="opp-tag" style="background:#dcfce7;color:#166534">Branding</span></div>
+    <div class="opp-card orange"><h4>📺 Display Ads Programático</h4><p>Alcance en ecosistema MELI (MercadoPago, envíos). El contexto de crecimiento +41% MLA y +35% Small Appliances YoY justifica inversión en awareness de nuevas líneas.</p><span class="opp-tag" style="background:#fff7ed;color:#c2410c">Awareness</span></div>
+  </div>
+  <h2 style="font-size:14px;font-weight:700;margin-bottom:14px;margin-top:6px">🎁 Rebate & Cupones Co-participados</h2>
+  <div class="opp-grid">
+    <div class="opp-card green"><h4>💰 Rebate por Volumen</h4><p>Con <strong>AR$1,265.9M NMV real de marca en Q1 2026</strong> (+10% YoY) y 3,862 órdenes, KitchenAid aplica a tramos altos de rebate. La cuenta oficial Whirlpool (CID 1488333462) y KITCHEN.AID generan juntas AR$221M (17.5% del total). <strong>Acción:</strong> Consolidar NMV de ambas cuentas para negociar condiciones al equipo Benefits MLA.</p><span class="opp-tag" style="background:#dcfce7;color:#166534">Alto impacto · REAL</span></div>
+    <div class="opp-card"><h4>🎟️ Cupones Co-participados</h4><p>Descuento co-financiado 10–20% para hot shoppers con visitas previas al catálogo KitchenAid. Con 710K UBs en KITCHEN, la audiencia disponible es grande. <strong>Timing:</strong> Día de la Madre 12/05.</p><span class="opp-tag" style="background:var(--meli-l);color:var(--meli)">Q2 2026</span></div>
+    <div class="opp-card orange"><h4>📈 Incrementalidad</h4><p>Medir si los cupones generan ventas verdaderamente incrementales antes de escalar. KitchenAid tiene alta intención branded — el uplift puede ser más bajo de lo esperado. Coordinar con Benefits.</p><span class="opp-tag" style="background:#fff7ed;color:#c2410c">Medición</span></div>
+    <div class="opp-card purple"><h4>🏷️ CSI 18–24 cuotas</h4><p>Para Professional Bowl-Lift ($700K–$1.47M), cuotas ampliadas son clave vs. Tecnofast. El ticket promedio KITCHEN de AR$103K real confirma la sensibilidad al precio en el segmento.</p><span class="opp-tag" style="background:#f3e8ff;color:#6b21a8">Ticket alto</span></div>
+    <div class="opp-card green"><h4>🛒 Bundle Artisan + Accesorio</h4><p>Descuento co-financiado 50/50 al agregar accesorio con batidora. Con attach rate estimado en 24% vs. benchmark 35–45%, hay un gap importante que capturar con 710K UBs activos.</p><span class="opp-tag" style="background:#dcfce7;color:#166534">Cross-sell</span></div>
+    <div class="opp-card orange"><h4>🗓️ Calendario Q2 2026</h4><p><strong>12/05 Día de la Madre:</strong> Campaña principal Artisan<br><strong>Jun CyberWeek:</strong> Accesorios + bundles<br><strong>Jul Hot Sale:</strong> Professional Bowl-Lift<br><strong>Ago:</strong> Procesadores + licuadoras</p><span class="opp-tag" style="background:#fff7ed;color:#c2410c">Planificación</span></div>
+  </div>
+  <div class="table-box">
+    <h3>✅ Próximos pasos · Q2 2026</h3>
+    <div class="csub" style="display:block">Priorizados por impacto</div>
+    <table>
+      <thead><tr><th>#</th><th>Acción</th><th>Área</th><th>Impacto</th><th>Urgencia</th><th>Interlocutor MELI</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Activar cupón co-participado Día de la Madre (10–15% Artisan)</td><td>Benefits</td><td><span class="badge green">Alto</span></td><td><span class="badge red">Urgente</span></td><td>Equipo Benefits MLA</td></tr>
+        <tr><td>2</td><td>Brand Ads Posición 0 — "batidora" / "batidora planetaria"</td><td>Meli Ads</td><td><span class="badge green">Alto</span></td><td><span class="badge red">Urgente</span></td><td>Account Manager Ads MLA</td></tr>
+        <tr><td>3</td><td>Monitorear precio Tecnofast Professional (−40%) — riesgo crítico</td><td>Pricing</td><td><span class="badge green">Alto</span></td><td><span class="badge red">Urgente</span></td><td>Key Accounts MLA</td></tr>
+        <tr><td>4</td><td>Cross-sell automático Artisan + accesorio en PDP</td><td>Catálogo</td><td><span class="badge green">Alto</span></td><td><span class="badge orange">Mediano</span></td><td>Key Accounts MLA</td></tr>
+        <tr><td>5</td><td>Negociar CSI 18 cuotas para Professional (>$700K)</td><td>Financiero</td><td><span class="badge orange">Medio</span></td><td><span class="badge orange">Mediano</span></td><td>Equipo Cuotas MLA</td></tr>
+        <tr><td>6</td><td>Solicitar condiciones de rebate Q2 a equipo Benefits</td><td>Benefits</td><td><span class="badge orange">Medio</span></td><td><span class="badge orange">Mediano</span></td><td>Equipo Benefits MLA</td></tr>
+        <tr><td>7</td><td>Habilitar brand-level orders query para KPIs KA exactos</td><td>Analytics</td><td><span class="badge orange">Medio</span></td><td><span class="badge gray">Planificación</span></td><td>Analista Data MLA</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="footer">
+  Reporte generado: 22/04/2026 · CID 1488333462 · KitchenAid · MLA Argentina · Q1 2026<br>
+  <strong>Fuente:</strong> Mercado Libre Analytics · MLA Argentina · Q1 2026<br>
+  <span style="color:#065f46">✅ Datos de mercado Mercado Libre Argentina · Q1 2026. KPIs de carrito y attach rate son estimaciones basadas en catálogo activo.</span>
+</div>
+
+<script>
+const C={blue:'#3483FA',green:'#00A650',orange:'#FF7733',red:'#D32F2F',purple:'#8172B3',teal:'#17a2b8'}
+const MO=['Ene','Feb','Mar']
+const opt={responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{usePointStyle:true,padding:12,font:{size:11}}}}}
+
+function switchTab(id,el){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'))
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'))
+  document.getElementById('tab-'+id).classList.add('active')
+  el.classList.add('active')
+}
+
+// DATA Q1 2026 — Mercado Libre Analytics
+const MLA26={nmv:[1298.7,1147.4,1372.7],ub:[6504706,6214925,6711899]}
+const MLA25={nmv:[886.1,835.3,981.7],ub:[5395931,5182478,5466839]}
+const SA26={nmv:[34.1,33.0,44.5],ub:[317875,305196,392442]}
+const SA25={nmv:[24.2,24.1,34.2]}
+// KITCHENAID BRAND (todos los sellers) — REAL BQ · Q1 2026 vs Q1 2025
+const KA26={nmv:[357.6,386.7,521.6],orders:[1130,1226,1506],buyers:[911,980,1227]}
+const KA25={nmv:[363.0,319.5,468.1],orders:[925,791,1094],buyers:[819,721,997]}
+// KITCHEN.AID Tienda Oficial (seller 253789061) — REAL BQ
+const KAoficial26={nmv:[40.0,22.8,49.3],orders:[221,164,302]}
+const KAoficial25={nmv:[2.9,0.5,2.3],orders:[16,4,18]}
+
+function mkChart(id,cfg){new Chart(document.getElementById(id).getContext('2d'),cfg)}
+
+mkChart('cMlaNmv',{type:'bar',data:{labels:MO,datasets:[
+  {label:'Q1 2026',data:MLA26.nmv,backgroundColor:C.blue+'CC',borderRadius:5},
+  {label:'Q1 2025',data:MLA25.nmv,backgroundColor:C.green+'88',borderRadius:5}
+]},options:{...opt,scales:{y:{ticks:{callback:v=>v+'B'}},x:{grid:{display:false}}},plugins:{...opt.plugins,tooltip:{callbacks:{label:c=>c.dataset.label+': AR$'+c.parsed.y+'B'}}}}})
+
+mkChart('cSaNmv',{type:'bar',data:{labels:MO,datasets:[
+  {label:'Q1 2026',data:SA26.nmv,backgroundColor:C.blue+'CC',borderRadius:5},
+  {label:'Q1 2025',data:SA25.nmv,backgroundColor:C.green+'88',borderRadius:5}
+]},options:{...opt,scales:{y:{ticks:{callback:v=>v+'B'}},x:{grid:{display:false}}},plugins:{...opt.plugins,tooltip:{callbacks:{label:c=>c.dataset.label+': AR$'+c.parsed.y+'B'}}}}})
+
+mkChart('cUb',{type:'line',data:{labels:MO,datasets:[
+  {label:'UB MLA 2026',data:MLA26.ub.map(v=>+(v/1e6).toFixed(2)),borderColor:C.blue,backgroundColor:C.blue+'18',fill:true,tension:.3,borderWidth:2,pointRadius:4},
+  {label:'UB MLA 2025',data:MLA25.ub.map(v=>+(v/1e6).toFixed(2)),borderColor:C.green,backgroundColor:C.green+'18',fill:true,tension:.3,borderWidth:2,pointRadius:4},
+  {label:'UB Small App 2026',data:SA26.ub.map(v=>+(v/1e6).toFixed(3)),borderColor:C.orange,borderDash:[5,3],backgroundColor:'transparent',tension:.3,borderWidth:2,pointRadius:3}
+]},options:{...opt,scales:{y:{ticks:{callback:v=>v+'M'}},x:{grid:{display:false}}},plugins:{...opt.plugins,tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y+'M'}}}}})
+
+mkChart('cSaMix',{type:'doughnut',data:{labels:['KITCHEN (AR$73.2B)','H&CLEANING (AR$38.4B)'],datasets:[{data:[73.2,38.4],backgroundColor:[C.blue+'CC',C.orange+'CC'],borderColor:'#fff',borderWidth:2}]},options:{...opt,cutout:'58%'}})
+
+// CATEGORÍAS
+mkChart('cSaSub',{type:'doughnut',data:{labels:['KITCHEN','HOUSING & CLEANING'],datasets:[{data:[73.2,38.4],backgroundColor:[C.blue+'CC',C.teal+'CC'],borderColor:'#fff',borderWidth:2}]},options:{...opt,cutout:'55%',plugins:{...opt.plugins,tooltip:{callbacks:{label:c=>c.label+': AR$'+c.parsed+'B'}}}}})
+
+mkChart('cKitchenEv',{type:'bar',data:{labels:MO,datasets:[
+  {label:'KITCHEN',data:[22.4,21.6,29.2],backgroundColor:C.blue+'CC',borderRadius:5},
+  {label:'H&CLEANING',data:[11.7,11.4,15.3],backgroundColor:C.teal+'88',borderRadius:5}
+]},options:{...opt,scales:{y:{ticks:{callback:v=>v+'B'}},x:{grid:{display:false}}},plugins:{...opt.plugins,tooltip:{callbacks:{label:c=>c.dataset.label+': AR$'+c.parsed.y+'B'}}}}})
+
+// Ticket real = NMV_KITCHEN / UB (estimated monthly split 30.6/29.5/39.9%)
+const kitchenNmvM=[22.4e9,21.6e9,29.2e9]
+const saUbM=SA26.ub
+const ticketK=kitchenNmvM.map((n,i)=>Math.round(n/saUbM[i]/1000))
+mkChart('cTicketReal',{type:'line',data:{labels:MO,datasets:[{label:'Ticket prom. KITCHEN (AR$ K)',data:ticketK,borderColor:C.blue,backgroundColor:C.blue+'18',fill:true,tension:.3,borderWidth:2,pointRadius:5,pointBackgroundColor:C.blue}]},options:{...opt,scales:{y:{ticks:{callback:v=>'$'+v+'K'},suggestedMin:60},x:{grid:{display:false}}},plugins:{...opt.plugins,legend:{display:false},tooltip:{callbacks:{label:c=>'AR$'+c.parsed.y+'K'}}}}})
+
+// PLAYERS
+mkChart('cPlayersShare',{type:'doughnut',data:{labels:['GASTRONOMIABASHIR','TIENDA_COLUCCI','DETODO NET','GASTRO HOGAR','KITCHEN.AID (Oficial)','Whirlpool (CID 1488333462)','CORDONAT','SAMERELECTRO','MAGAZZINO','HOUSEANDOFFICE','Otros'],datasets:[{data:[20.4,12.4,11.3,9.3,8.9,8.6,3.7,3.3,2.9,2.5,16.7],backgroundColor:[C.blue+'CC',C.green+'CC',C.teal+'CC',C.purple+'CC','#1B1F3B',C.orange+'CC',C.red+'88','#8b5cf6','#06b6d4','#f59e0b','#ccc'],borderColor:'#fff',borderWidth:2}]},options:{...opt,cutout:'50%',plugins:{...opt.plugins,tooltip:{callbacks:{label:c=>c.label+': '+c.parsed+'% (REAL Q1 2026)'}}}}})
+// KitchenAid brand NMV trend — Q1 2026 vs Q1 2025
+mkChart('cKaBrandTrend',{type:'bar',data:{labels:MO,datasets:[
+  {label:'NMV Marca 2026',data:KA26.nmv,backgroundColor:C.blue+'CC',borderRadius:5},
+  {label:'NMV Marca 2025',data:KA25.nmv,backgroundColor:C.green+'88',borderRadius:5}
+]},options:{...opt,scales:{y:{ticks:{callback:v=>v+'M'}},x:{grid:{display:false}}},plugins:{...opt.plugins,tooltip:{callbacks:{label:c=>c.dataset.label+': AR$'+c.parsed.y+'M'}}}}})
+// cPlayersCat removed — replaced by cKaBrandTrend (real brand NMV trend)
+
+// CARRITO
+mkChart('cCarrito',{type:'bar',data:{labels:['Sin accesorio','+ 1 acc.','+ 2 acc.','Bundle completo'],datasets:[
+  {label:'Batidora (AR$ K)',data:[215,215,215,215],backgroundColor:C.blue+'CC',borderRadius:[4,0,0,0]},
+  {label:'Accesorios (AR$ K)',data:[0,45,95,155],backgroundColor:C.green+'CC',borderRadius:[0,4,4,4]}
+]},options:{...opt,scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,ticks:{callback:v=>'$'+v+'K'}}},plugins:{...opt.plugins,tooltip:{callbacks:{label:c=>c.dataset.label+': AR$'+c.parsed.y+'K'}}}}})
+
+mkChart('cAttach',{type:'bar',data:{labels:['Fabricadora helado','Procesador alim.','Cortador espiral','Batidor extra','Laminador pasta','Picadora carne'],datasets:[{label:'Attach rate',data:[38,28,22,18,12,8],backgroundColor:[C.blue+'CC',C.blue+'AA',C.green+'AA',C.green+'88',C.orange+'88',C.orange+'66'],borderRadius:5}]},options:{...opt,indexAxis:'y',scales:{x:{beginAtZero:true,max:50,ticks:{callback:v=>v+'%'}},y:{grid:{display:false}}},plugins:{...opt.plugins,legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.x+'%'}}}}})
+
+mkChart('cTicketEsc',{type:'bar',data:{labels:['Ticket prom. KA\nmarca real (AR$328K)','Solo batidora\nArtisan 4.8L','+ Product Ads','+ 1 accesorio','CSI 18 cuotas','Cupón 15% off','Estrategia integral'],datasets:[{label:'Ticket (AR$ K)',data:[328,179,215,254,290,157,410],backgroundColor:['#94a3b8',C.blue+'99',C.blue+'CC',C.green+'CC',C.teal+'CC',C.orange+'CC',C.purple+'CC'],borderRadius:6}]},options:{...opt,scales:{y:{ticks:{callback:v=>'$'+v+'K'}},x:{grid:{display:false}}},plugins:{...opt.plugins,legend:{display:false},tooltip:{callbacks:{label:c=>'AR$'+c.parsed.y+'K'}}}}})
+</script>
+</body>
+</html>
